@@ -77,13 +77,13 @@ export function Navbar() {
 
             {/* Actions: Admin Portal Link & Cart */}
             <div className="flex items-center gap-3">
-              <Link
+              {/* <Link
                 href="/admin"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-slate-700 hover:text-slate-950 bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-colors"
               >
                 <Shield size={14} className="text-rose-500" />
                 <span>Admin</span>
-              </Link>
+              </Link> */}
 
               <button
                 onClick={() => setIsCartOpen(true)}
