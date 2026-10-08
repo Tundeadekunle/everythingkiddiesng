@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+.kiddie-gradient {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FFA07A 50%, #4ECDC4 100%);
+}
+
+.kiddie-hero-badge {
+  background: linear-gradient(90deg, #F59E0B, #EC4899);
+}
