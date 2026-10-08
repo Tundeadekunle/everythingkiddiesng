@@ -115,11 +115,13 @@ export default function CheckoutPage() {
 
       // Live Paystack redirect
       if (data.authorization_url) {
+        clearCart();
         window.location.href = data.authorization_url;
       } else {
         throw new Error("Missing Paystack authorization URL");
       }
     } catch (error: any) {
+
       toast.error(error.message || "An unexpected error occurred");
       setLoading(false);
     }

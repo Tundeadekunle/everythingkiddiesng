@@ -17,7 +17,10 @@ export async function POST(req: Request) {
 
     const orderNumber = `EK-${Date.now().toString().slice(-6)}-${Math.floor(Math.random() * 900 + 100)}`;
     const paystackRef = `ps_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
-    const callbackUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/paystack/verify?reference=${paystackRef}&orderNumber=${orderNumber}`;
+    
+    // Resolve app origin dynamically for robust redirect
+    const origin = req.headers.get("origin") || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const callbackUrl = `${origin}/api/paystack/verify?reference=${paystackRef}&orderNumber=${orderNumber}`;
 
     // 1. Try saving order to Neon Postgres
     try {

@@ -19,16 +19,31 @@ export async function GET(req: Request) {
     if (secretKey && !secretKey.includes("mock")) {
       const verifyRes = await verifyPaystackTransaction(reference);
 
-      if (verifyRes.status && verifyRes.data.status === "success") {
+      if (verifyRes.status && verifyRes.data && verifyRes.data.status === "success") {
+        const paidDate = verifyRes.data.paid_at ? new Date(verifyRes.data.paid_at) : new Date();
+        const metaOrderNumber = verifyRes.data.metadata?.orderNumber;
+
         // Update database order to paid
         try {
-          await db
+          const updated = await db
             .update(orders)
             .set({
               status: "paid",
-              paidAt: new Date(),
+              paidAt: paidDate,
             })
-            .where(eq(orders.paystackReference, reference));
+            .where(eq(orders.paystackReference, reference))
+            .returning({ id: orders.id, orderNumber: orders.orderNumber });
+
+          if (updated.length === 0 && metaOrderNumber) {
+            await db
+              .update(orders)
+              .set({
+                status: "paid",
+                paidAt: paidDate,
+                paystackReference: reference,
+              })
+              .where(eq(orders.orderNumber, metaOrderNumber));
+          }
         } catch (dbErr) {
           console.warn("DB update failed on verification:", dbErr);
         }
@@ -43,4 +58,5 @@ export async function GET(req: Request) {
     console.error("Verification error:", error);
     return NextResponse.redirect(new URL("/cart", req.url));
   }
+
 }
