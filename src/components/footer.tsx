@@ -106,7 +106,7 @@ export function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <span>Ã‚Â© {new Date().getFullYear()} EverythingKiddies Nigeria. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} EverythingKiddies Nigeria. All rights reserved.</span>
         <span className="flex items-center gap-1">
           Made with <Heart size={12} className="text-rose-500 fill-rose-500" /> for smart, happy kids.
         </span>

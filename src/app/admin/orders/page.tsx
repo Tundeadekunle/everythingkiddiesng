@@ -138,7 +138,84 @@ export default function AdminOrdersPage() {
       </div>
 
       <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
+        {/* Mobile View: Clean cards for small screens */}
+        <div className="block lg:hidden divide-y divide-slate-100">
+          {ordersList.map((order) => (
+            <div key={order.id} className="p-4 space-y-3">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <span className="font-mono font-bold text-slate-900 text-xs block">
+                    {order.orderNumber}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono">
+                    {order.paystackReference}
+                  </span>
+                </div>
+                <span
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                    order.status === "paid" || order.status === "delivered"
+                      ? "bg-emerald-50 text-emerald-700"
+                      : order.status === "shipped"
+                      ? "bg-sky-50 text-sky-700"
+                      : "bg-amber-50 text-amber-700"
+                  }`}
+                >
+                  <CheckCircle size={10} />
+                  {order.status}
+                </span>
+              </div>
+
+              <div className="bg-slate-50 p-2.5 rounded-xl space-y-1 text-xs">
+                <div className="font-bold text-slate-800">{order.customerName}</div>
+                <div className="text-[11px] text-slate-500">{order.customerEmail}</div>
+                <div className="text-[11px] text-slate-500">
+                  {order.city}, {order.state} • {order.customerPhone}
+                </div>
+              </div>
+
+              {order.items && order.items.length > 0 && (
+                <div className="text-xs space-y-1 border-t border-slate-100 pt-2">
+                  <div className="text-[11px] font-bold text-slate-400 uppercase">Items:</div>
+                  <ul className="space-y-1">
+                    {order.items.map((item, idx) => (
+                      <li key={idx} className="text-slate-700 text-xs flex justify-between">
+                        <span>
+                          <strong className="text-rose-500">{item.quantity}x</strong> {item.productTitle}
+                        </span>
+                        <span className="font-semibold">{formatPrice(item.price)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block">Total Due</span>
+                  <span className="font-black text-rose-600 text-sm">{formatPrice(order.totalAmount)}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] text-slate-500 font-bold">Status:</span>
+                  <select
+                    value={order.status}
+                    onChange={(e) => handleUpdateStatus(order.id, e.target.value)}
+                    className="px-2 py-1 text-xs font-bold bg-white border border-slate-200 rounded-lg text-slate-800 focus:outline-none focus:ring-1 focus:ring-rose-500"
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="paid">Paid</option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop View: Full Data Table */}
+        <div className="hidden lg:block overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-50 border-b border-slate-100 text-slate-500 font-bold uppercase tracking-wider">
               <tr>
@@ -166,7 +243,7 @@ export default function AdminOrdersPage() {
                     <div className="font-bold text-slate-800">{order.customerName}</div>
                     <div className="text-[11px] text-slate-500">{order.customerEmail}</div>
                     <div className="text-[11px] text-slate-500">
-                      {order.city}, {order.state} ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ {order.customerPhone}
+                      {order.city}, {order.state} • {order.customerPhone}
                     </div>
                   </td>
 
@@ -224,6 +301,7 @@ export default function AdminOrdersPage() {
           </table>
         </div>
       </div>
+
     </div>
   );
 }

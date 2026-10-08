@@ -57,13 +57,13 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
               <span>Filter by Category</span>
             </div>
 
-            <div className="flex flex-col space-y-1.5">
+            <div className="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-2 pb-1 lg:pb-0 scrollbar-none">
               <Link
                 href="/products"
-                className={`px-3 py-2 rounded-xl text-xs font-bold transition-colors ${
+                className={`px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors flex-shrink-0 lg:flex-shrink ${
                   !category
                     ? "bg-rose-500 text-white shadow-sm"
-                    : "text-slate-600 hover:bg-slate-50"
+                    : "text-slate-600 bg-slate-50 lg:bg-transparent hover:bg-slate-100"
                 }`}
               >
                 All Products
@@ -72,10 +72,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 <Link
                   key={cat.id}
                   href={`/products?category=${cat.slug}`}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold transition-colors ${
+                  className={`px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors flex-shrink-0 lg:flex-shrink ${
                     category === cat.slug
                       ? "bg-rose-500 text-white shadow-sm"
-                      : "text-slate-600 hover:bg-slate-50"
+                      : "text-slate-600 bg-slate-50 lg:bg-transparent hover:bg-slate-100"
                   }`}
                 >
                   {cat.name}
@@ -83,6 +83,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
               ))}
             </div>
           </div>
+
 
           {/* Quick Notice */}
           <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 space-y-2">

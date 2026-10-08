@@ -91,7 +91,7 @@ export default async function HomePage() {
                     <h3 className="font-extrabold text-sm text-slate-900">
                       Mercedes-Benz G63 AMG
                     </h3>
-                    <p className="text-xs text-slate-500">Dual Motor Ã¢â‚¬Â¢ Bluetooth Music Ã¢â‚¬Â¢ Leather Seat</p>
+                    <p className="text-xs text-slate-500">Dual Motor • Bluetooth Music • Leather Seat</p>
                   </div>
                   <Link
                     href="/products/mercedes-benz-g63-amg-12v-electric-ride-on-suv"

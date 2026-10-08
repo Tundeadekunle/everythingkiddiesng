@@ -118,7 +118,7 @@ export function ProductGalleryAndCart({ product }: ProductClientProps) {
 
           <div className="mt-3 flex items-center gap-4">
             <RatingStars rating={product.rating} reviewsCount={product.reviewsCount} size={18} />
-            <span className="text-slate-300">Ã¢â‚¬Â¢</span>
+            <span className="text-slate-300">•</span>
             <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">
               {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
             </span>

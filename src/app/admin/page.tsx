@@ -35,23 +35,24 @@ export default async function AdminDashboardOverview() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2.5">
           <Link
             href="/admin/signup"
-            className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-bold text-xs shadow-sm transition-all inline-flex items-center gap-1.5"
+            className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-bold text-xs shadow-sm transition-all inline-flex items-center justify-center gap-1.5"
           >
             <UserPlus size={14} />
             <span>Add Admin Account</span>
           </Link>
           <Link
             href="/admin/products/new"
-            className="px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs shadow-md transition-all inline-flex items-center gap-1.5"
+            className="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs shadow-md transition-all inline-flex items-center justify-center gap-1.5"
           >
             <Plus size={15} />
             <span>Upload New Product</span>
           </Link>
         </div>
       </div>
+
 
       {/* Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -133,73 +134,105 @@ export default async function AdminDashboardOverview() {
             </Link>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 border-b border-slate-100 text-slate-500 font-bold uppercase tracking-wider">
-                <tr>
-                  <th className="py-3 px-4">Item</th>
-                  <th className="py-3 px-4">Price</th>
-                  <th className="py-3 px-4">Rating</th>
-                  <th className="py-3 px-4">Stock</th>
-                  <th className="py-3 px-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {products.map((p) => (
-                  <tr key={p.id} className="hover:bg-slate-50/60 transition-colors">
-                    <td className="py-3.5 px-4 flex items-center gap-3">
-                      <img
-                        src={p.images?.[0] || ""}
-                        alt={p.title}
-                        className="h-10 w-10 rounded-lg object-cover bg-slate-100 flex-shrink-0"
-                      />
-                      <div>
-                        <span className="font-bold text-slate-900 block truncate max-w-xs">
-                          {p.title}
-                        </span>
-                        <span className="text-[11px] text-slate-400">
-                          {p.badge || "Standard"}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="py-3.5 px-4 font-bold text-slate-800">
-                      {formatPrice(p.price)}
-                    </td>
-                    <td className="py-3.5 px-4 font-bold text-amber-500">
-                      ? {p.rating} <span className="text-slate-400 font-normal">({p.reviewsCount})</span>
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                          p.stock > 0
-                            ? "bg-emerald-50 text-emerald-700"
-                            : "bg-rose-50 text-rose-700"
-                        }`}
-                      >
-                        {p.stock} units
+          <>
+            {/* Mobile Cards for Recent Products */}
+            <div className="block lg:hidden divide-y divide-slate-100">
+              {products.slice(0, 5).map((p) => (
+                <div key={p.id} className="p-4 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <img
+                      src={p.images?.[0] || ""}
+                      alt={p.title}
+                      className="h-12 w-12 rounded-xl object-cover bg-slate-100 flex-shrink-0 border border-slate-200"
+                    />
+                    <div className="min-w-0">
+                      <span className="font-bold text-slate-900 text-xs block truncate">
+                        {p.title}
                       </span>
-                    </td>
-                    <td className="py-3.5 px-4 text-right space-x-2">
-                      <Link
-                        href={`/admin/products/${p.id}/edit`}
-                        className="inline-flex items-center gap-1 text-rose-600 hover:text-rose-700 font-bold bg-rose-50 px-2.5 py-1 rounded-md"
-                      >
-                        <Edit3 size={11} /> Edit
-                      </Link>
-                      <Link
-                        href={`/products/${p.slug}`}
-                        target="_blank"
-                        className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 font-bold"
-                      >
-                        View <ArrowUpRight size={13} />
-                      </Link>
-                    </td>
+                      <span className="font-bold text-rose-600 text-xs">
+                        {formatPrice(p.price)}
+                      </span>
+                      <span className={`text-[10px] font-semibold ml-2 ${p.stock > 0 ? "text-emerald-600" : "text-rose-600"}`}>
+                        {p.stock > 0 ? `${p.stock} left` : "Out of stock"}
+                      </span>
+                    </div>
+                  </div>
+                  <Link
+                    href={`/admin/products/${p.id}/edit`}
+                    className="inline-flex items-center gap-1 text-rose-600 hover:text-rose-700 font-bold bg-rose-50 px-2.5 py-1.5 rounded-lg text-xs flex-shrink-0"
+                  >
+                    <Edit3 size={12} /> Edit
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Table for Recent Products */}
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-50 border-b border-slate-100 text-slate-500 font-bold uppercase tracking-wider">
+                  <tr>
+                    <th className="py-3 px-4">Item</th>
+                    <th className="py-3 px-4">Price</th>
+                    <th className="py-3 px-4">Stock</th>
+                    <th className="py-3 px-4 text-right">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {products.slice(0, 6).map((p) => (
+                    <tr key={p.id} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="py-3.5 px-4 flex items-center gap-3">
+                        <img
+                          src={p.images?.[0] || ""}
+                          alt={p.title}
+                          className="h-10 w-10 rounded-lg object-cover bg-slate-100 flex-shrink-0"
+                        />
+                        <div>
+                          <span className="font-bold text-slate-900 block truncate max-w-xs">
+                            {p.title}
+                          </span>
+                          <span className="text-[11px] text-slate-400">
+                            {p.badge || "Standard"}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="py-3.5 px-4 font-bold text-slate-800">
+                        {formatPrice(p.price)}
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span
+                          className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                            p.stock > 0
+                              ? "bg-emerald-50 text-emerald-700"
+                              : "bg-rose-50 text-rose-700"
+                          }`}
+                        >
+                          {p.stock} units
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4 text-right space-x-2">
+                        <Link
+                          href={`/admin/products/${p.id}/edit`}
+                          className="inline-flex items-center gap-1 text-rose-600 hover:text-rose-700 font-bold bg-rose-50 px-2.5 py-1 rounded-md"
+                        >
+                          <Edit3 size={11} /> Edit
+                        </Link>
+                        <Link
+                          href={`/products/${p.slug}`}
+                          target="_blank"
+                          className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 font-bold"
+                        >
+                          View <ArrowUpRight size={13} />
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
+
       </div>
     </div>
   );

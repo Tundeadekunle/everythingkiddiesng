@@ -55,15 +55,16 @@ export default function CartPage() {
           {items.map((item) => (
             <div
               key={item.id}
-              className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row items-center gap-5"
+              className="bg-white p-3.5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-row items-center gap-3.5 sm:gap-5"
             >
               <img
                 src={item.image}
                 alt={item.title}
-                className="h-24 w-24 rounded-xl object-cover bg-slate-50 flex-shrink-0"
+                className="h-20 w-20 sm:h-24 sm:w-24 rounded-xl object-cover bg-slate-50 flex-shrink-0"
               />
 
-              <div className="flex-1 w-full space-y-1">
+              <div className="flex-1 min-w-0 space-y-1">
+
                 <div className="flex items-start justify-between gap-4">
                   <Link
                     href={`/products/${item.slug}`}

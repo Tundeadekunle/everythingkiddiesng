@@ -15,11 +15,12 @@ export default async function AdminLayout({
   const user = await getCurrentUser();
 
   return (
-    <div className="flex min-h-screen bg-slate-100">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-slate-100">
       <AdminSidebar />
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <main className="flex-1 p-6 lg:p-10">{children}</main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-10">{children}</main>
       </div>
     </div>
   );
+
 }

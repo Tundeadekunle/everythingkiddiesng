@@ -114,9 +114,9 @@ export default function AdminLoginPage() {
 
           <Link
             href="/"
-            className="text-slate-400 hover:text-slate-200 font-semibold"
+            className="text-slate-400 hover:text-slate-200 font-semibold flex items-center gap-1"
           >
-            ? Return to Store
+            ← Return to Store
           </Link>
         </div>
       </div>

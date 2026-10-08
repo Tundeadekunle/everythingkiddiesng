@@ -225,7 +225,7 @@ export default function NewProductAdminPage() {
             {/* Price & Stock */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700">Price (? Naira) *</label>
+                <label className="text-xs font-bold text-slate-700">Price (₦ NGN) *</label>
                 <input
                   type="number"
                   required
@@ -238,7 +238,7 @@ export default function NewProductAdminPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700">Original / Compare Price (?)</label>
+                <label className="text-xs font-bold text-slate-700">Original / Compare Price (₦ NGN)</label>
                 <input
                   type="number"
                   name="compareAtPrice"
@@ -248,6 +248,7 @@ export default function NewProductAdminPage() {
                   className="w-full px-4 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 font-mono"
                 />
               </div>
+
 
               <div className="space-y-1">
                 <label className="text-xs font-bold text-slate-700">Stock Quantity</label>
