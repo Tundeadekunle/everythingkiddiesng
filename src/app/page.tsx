@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Zap, ShieldCheck, Award, Star, Truck, HeartHandshake, Sparkles } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
+import { HeroSlider } from "@/components/hero-slider";
 import { getProducts, getCategories } from "@/lib/data";
 
 export default async function HomePage() {
@@ -68,39 +69,9 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right Hero Image Card */}
+            {/* Right Hero Image Slider */}
             <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl bg-white p-3 border border-slate-100">
-                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-100">
-                  <img
-                    src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=1000&q=80"
-                    alt="Mercedes G63 Kids Ride On Car"
-                    className="w-full h-full object-cover object-center"
-                  />
-                  <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
-                    <Award size={13} className="text-amber-400" />
-                    <span>Parental Remote Included</span>
-                  </div>
-                  <div className="absolute bottom-3 right-3 bg-rose-500 text-white text-xs font-black px-3.5 py-1.5 rounded-xl shadow-lg">
-                    Dual 12V High Torque
-                  </div>
-                </div>
-
-                <div className="p-4 flex items-center justify-between">
-                  <div>
-                    <h3 className="font-extrabold text-sm text-slate-900">
-                      Mercedes-Benz G63 AMG
-                    </h3>
-                    <p className="text-xs text-slate-500">Dual Motor • Bluetooth Music • Leather Seat</p>
-                  </div>
-                  <Link
-                    href="/products/mercedes-benz-g63-amg-12v-electric-ride-on-suv"
-                    className="h-10 w-10 rounded-xl bg-slate-100 hover:bg-rose-500 hover:text-white flex items-center justify-center text-slate-700 transition-colors"
-                  >
-                    <ArrowRight size={18} />
-                  </Link>
-                </div>
-              </div>
+              <HeroSlider />
 
               {/* Decorative Blur Spheres */}
               <div className="absolute -top-12 -right-12 w-64 h-64 bg-rose-300/30 rounded-full blur-3xl pointer-events-none -z-10" />

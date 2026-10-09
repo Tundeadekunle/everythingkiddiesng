@@ -21,3 +21,13 @@
 .kiddie-hero-badge {
   background: linear-gradient(90deg, #F59E0B, #EC4899);
 }
+
+@keyframes heroSlideProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+

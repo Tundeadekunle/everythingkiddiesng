@@ -26,7 +26,7 @@ export function Navbar() {
       {/* Top Announcement */}
       <div className="bg-slate-900 text-slate-100 text-[11px] font-medium py-1.5 px-4 text-center flex items-center justify-center gap-2">
         <Sparkles size={13} className="text-amber-400" />
-        <span>Live NeonDB Storefront • Fast Doorstep Delivery across Nigeria • Electric Rides & Toys</span>
+        <span>• Fast Doorstep Delivery across Nigeria • Electric Rides & Toys</span>
       </div>
 
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100">
