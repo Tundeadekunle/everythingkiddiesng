@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, Zap, ShieldCheck, Award, Star, Truck, HeartHandshake, Sparkles } from "lucide-react";
+import { ArrowRight, Zap, ShieldCheck } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
-import { HeroSlider } from "@/components/hero-slider";
+import { CdcareHero } from "@/components/cdcare-hero";
 import { getProducts, getCategories } from "@/lib/data";
 
 export default async function HomePage() {
@@ -12,74 +12,9 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col gap-16 pb-16">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-rose-50/60 via-amber-50/30 to-white pt-10 pb-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Hero Content */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-100 text-rose-700 text-xs font-bold shadow-sm">
-                <Sparkles size={14} className="text-rose-600" />
-                <span>Next-Gen Kids Electric Rides & Montessori Toys</span>
-              </div>
+      {/* CDcare-Style Hero Section */}
+      <CdcareHero />
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
-                Unforgettable Thrills.{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-amber-500 to-rose-600">
-                  Brighter Minds.
-                </span>
-              </h1>
-
-              <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                Discover Nigeria&#39;s premier collection of licensed electric Mercedes, BMW ride-on cars, superbikes, and award-winning STEM robotics kits that nurture childhood imagination.
-              </p>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
-                <Link
-                  href="/products?category=electric-ride-ons"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm shadow-lg shadow-rose-500/25 hover:shadow-xl transition-all flex items-center justify-center gap-2"
-                >
-                  <Zap size={18} />
-                  Shop Electric Ride-Ons
-                </Link>
-                <Link
-                  href="/products?category=educational-stem"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm border border-slate-200 shadow-sm transition-all flex items-center justify-center gap-2"
-                >
-                  Explore STEM & Learning
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-
-              {/* Social Proof Stats */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/60 max-w-md mx-auto lg:mx-0">
-                <div>
-                  <div className="text-xl sm:text-2xl font-black text-slate-900">100%</div>
-                  <div className="text-[11px] font-semibold text-slate-500">Child-Safe Verified</div>
-                </div>
-                <div>
-                  <div className="text-xl sm:text-2xl font-black text-rose-600">2,500+</div>
-                  <div className="text-[11px] font-semibold text-slate-500">Happy Kids in Nigeria</div>
-                </div>
-                <div>
-                  <div className="text-xl sm:text-2xl font-black text-slate-900">4.9 / 5</div>
-                  <div className="text-[11px] font-semibold text-slate-500">Customer Rating</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Hero Image Slider */}
-            <div className="lg:col-span-5 relative">
-              <HeroSlider />
-
-              {/* Decorative Blur Spheres */}
-              <div className="absolute -top-12 -right-12 w-64 h-64 bg-rose-300/30 rounded-full blur-3xl pointer-events-none -z-10" />
-              <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-amber-300/30 rounded-full blur-3xl pointer-events-none -z-10" />
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Categories Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -153,7 +88,7 @@ export default async function HomePage() {
       </section>
 
       {/* Trust & Safety Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="trust-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-rose-950 to-slate-900 text-white p-8 sm:p-12 shadow-xl relative overflow-hidden">
           <div className="relative z-10 max-w-2xl space-y-4">
             <span className="inline-block px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/30">
