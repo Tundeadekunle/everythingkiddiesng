@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Upload, Plus, Trash2, ArrowLeft, Loader2, Sparkles, Star } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { compressImage } from "@/lib/image-compress";
 
 export default function NewProductAdminPage() {
   const router = useRouter();
@@ -53,10 +54,11 @@ export default function NewProductAdminPage() {
     if (!file) return;
 
     setUploadingImage(true);
-    const body = new FormData();
-    body.append("file", file);
-
     try {
+      const optimizedFile = await compressImage(file);
+      const body = new FormData();
+      body.append("file", optimizedFile);
+
       const res = await fetch("/api/upload", {
         method: "POST",
         body,
@@ -68,10 +70,11 @@ export default function NewProductAdminPage() {
       } else {
         toast.error("Upload failed: " + (data.error || ""));
       }
-    } catch (err) {
+    } catch {
       toast.error("Error uploading image");
     } finally {
       setUploadingImage(false);
+      if (e.target) e.target.value = "";
     }
   };
 
