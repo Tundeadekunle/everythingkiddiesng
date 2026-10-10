@@ -2,7 +2,7 @@ import { getProducts } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { Package, ShoppingBag, DollarSign, AlertCircle, ArrowUpRight, Plus, Sparkles, UserPlus, Edit3 } from "lucide-react";
+import { Package, PackageCheck, DollarSign, AlertCircle, ArrowUpRight, Plus, Sparkles, UserPlus, Edit3, Eye } from "lucide-react";
 import Link from "next/link";
 
 export default async function AdminDashboardOverview() {
@@ -18,16 +18,16 @@ export default async function AdminDashboardOverview() {
   const lowStockProducts = products.filter((p) => p.stock <= 3 && p.stock > 0).length;
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="text-xs font-bold text-slate-500">
+    <div className="space-y-6 sm:space-y-8 w-full max-w-full min-w-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 w-full min-w-0">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 min-w-0 max-w-full">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
+            <span className="text-xs font-bold text-slate-500 truncate min-w-0 block">
               Welcome, {user.name} ({user.email})
             </span>
           </div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-1">
             Admin Console
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -35,84 +35,88 @@ export default async function AdminDashboardOverview() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="flex items-center gap-2">
           <Link
             href="/admin/signup"
-            className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-bold text-xs shadow-sm transition-all inline-flex items-center justify-center gap-1.5"
+            className="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg sm:rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 active:bg-slate-100 font-bold text-[11px] sm:text-xs shadow-sm transition-all inline-flex items-center justify-center gap-1 text-center"
           >
-            <UserPlus size={14} />
-            <span>Add Admin Account</span>
+            <UserPlus size={13} />
+            <span>Add Admin</span>
           </Link>
           <Link
             href="/admin/products/new"
-            className="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs shadow-md transition-all inline-flex items-center justify-center gap-1.5"
+            className="px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-lg sm:rounded-xl bg-rose-500 hover:bg-rose-600 active:bg-rose-700 text-white font-bold text-[11px] sm:text-xs shadow-sm transition-all inline-flex items-center justify-center gap-1 text-center"
           >
-            <Plus size={15} />
-            <span>Upload New Product</span>
+            <Plus size={13} />
+            <span>New Product</span>
           </Link>
         </div>
       </div>
 
-
-      {/* Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-2">
+      {/* Metric Cards - 2 cols on mobile, 4 on desktop */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5 w-full min-w-0">
+        <div className="bg-white p-3 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm space-y-1 min-w-0">
           <div className="flex items-center justify-between text-slate-500">
-            <span className="text-xs font-bold uppercase tracking-wider">Total Products</span>
-            <div className="p-2 rounded-xl bg-rose-50 text-rose-500">
-              <Package size={18} />
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider truncate">Total Items</span>
+            <div className="p-1 sm:p-2 rounded-lg sm:rounded-xl bg-rose-50 text-rose-500 flex-shrink-0">
+              <Package size={14} className="sm:hidden" />
+              <Package size={16} className="hidden sm:block" />
             </div>
           </div>
-          <div className="text-2xl font-black text-slate-900">{totalProducts}</div>
-          <div className="text-[11px] font-semibold text-slate-400">Stored in NeonDB</div>
+          <div className="text-lg sm:text-2xl font-black text-slate-900 truncate">{totalProducts}</div>
+          <div className="text-[10px] sm:text-[11px] font-semibold text-slate-400 truncate">In NeonDB</div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-2">
+        <div className="bg-white p-3 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm space-y-1 min-w-0">
           <div className="flex items-center justify-between text-slate-500">
-            <span className="text-xs font-bold uppercase tracking-wider">Active Inventory</span>
-            <div className="p-2 rounded-xl bg-emerald-50 text-emerald-500">
-              <ShoppingBag size={18} />
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider truncate">In Stock</span>
+            <div className="p-1 sm:p-2 rounded-lg sm:rounded-xl bg-emerald-50 text-emerald-500 flex-shrink-0">
+              <PackageCheck size={14} className="sm:hidden" />
+              <PackageCheck size={16} className="hidden sm:block" />
             </div>
           </div>
-          <div className="text-2xl font-black text-emerald-600">{inStockProducts}</div>
-          <div className="text-[11px] font-semibold text-slate-400">Available units</div>
+          <div className="text-lg sm:text-2xl font-black text-emerald-600 truncate">{inStockProducts}</div>
+          <div className="text-[10px] sm:text-[11px] font-semibold text-slate-400 truncate">Available units</div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-2">
+        <div className="bg-white p-3 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm space-y-1 min-w-0">
           <div className="flex items-center justify-between text-slate-500">
-            <span className="text-xs font-bold uppercase tracking-wider">Low Stock</span>
-            <div className="p-2 rounded-xl bg-amber-50 text-amber-500">
-              <AlertCircle size={18} />
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider truncate">Low Stock</span>
+            <div className="p-1 sm:p-2 rounded-lg sm:rounded-xl bg-amber-50 text-amber-500 flex-shrink-0">
+              <AlertCircle size={14} className="sm:hidden" />
+              <AlertCircle size={16} className="hidden sm:block" />
             </div>
           </div>
-          <div className="text-2xl font-black text-amber-600">{lowStockProducts}</div>
-          <div className="text-[11px] font-semibold text-slate-400">Under 3 items</div>
+          <div className="text-lg sm:text-2xl font-black text-amber-600 truncate">{lowStockProducts}</div>
+          <div className="text-[10px] sm:text-[11px] font-semibold text-slate-400 truncate">Under 3 items</div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-2">
+        <div className="bg-white p-3 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm space-y-1 min-w-0">
           <div className="flex items-center justify-between text-slate-500">
-            <span className="text-xs font-bold uppercase tracking-wider">Database Status</span>
-            <div className="p-2 rounded-xl bg-sky-50 text-sky-500">
-              <DollarSign size={18} />
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider truncate">Database</span>
+            <div className="p-1 sm:p-2 rounded-lg sm:rounded-xl bg-sky-50 text-sky-500 flex-shrink-0">
+              <DollarSign size={14} className="sm:hidden" />
+              <DollarSign size={16} className="hidden sm:block" />
             </div>
           </div>
-          <div className="text-sm font-black text-slate-900 mt-1">Neon PostgreSQL</div>
-          <div className="text-[11px] font-semibold text-emerald-600">Connected & Verified</div>
+          <div className="text-xs sm:text-sm font-black text-slate-900 mt-0.5 truncate">PostgreSQL</div>
+          <div className="text-[10px] sm:text-[11px] font-semibold text-emerald-600 truncate">Connected</div>
         </div>
       </div>
 
       {/* Inventory Table */}
-      <div className="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h2 className="text-base font-extrabold text-slate-900">Current Products</h2>
-            <p className="text-xs text-slate-500">Uploaded to your NeonDB database</p>
+      <div className="bg-white rounded-xl sm:rounded-3xl border border-slate-200/80 p-3 sm:p-6 shadow-sm space-y-4 sm:space-y-6 w-full max-w-full min-w-0 overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 w-full min-w-0">
+          <div className="min-w-0">
+            <h2 className="text-sm sm:text-base font-extrabold text-slate-900 truncate">Current Products</h2>
+            <p className="text-[11px] sm:text-xs text-slate-500 truncate">Uploaded to your NeonDB database</p>
           </div>
           <Link
             href="/admin/products/new"
-            className="px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs shadow-sm transition-all inline-flex items-center gap-1.5 self-start sm:self-auto"
+            className="px-2.5 py-1 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl bg-rose-500 hover:bg-rose-600 active:bg-rose-700 text-white font-bold text-[11px] sm:text-xs shadow-sm transition-all inline-flex items-center gap-1 self-start sm:self-auto flex-shrink-0"
           >
-            + Upload Product
+            <Plus size={12} />
+            <span>Upload Product</span>
           </Link>
         </div>
 
@@ -127,7 +131,7 @@ export default async function AdminDashboardOverview() {
             </p>
             <Link
               href="/admin/products/new"
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-rose-500 text-white font-bold text-xs shadow-md hover:bg-rose-600 transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-rose-500 text-white font-bold text-xs shadow-md hover:bg-rose-600 transition-colors"
             >
               <Sparkles size={14} />
               Upload First Product
@@ -135,34 +139,44 @@ export default async function AdminDashboardOverview() {
           </div>
         ) : (
           <>
-            {/* Mobile Cards for Recent Products */}
-            <div className="block lg:hidden divide-y divide-slate-100">
+            {/* Mobile Cards for Recent Products - Edit & View placed very close to price */}
+            <div className="block lg:hidden divide-y divide-slate-100 w-full min-w-0">
               {products.slice(0, 5).map((p) => (
-                <div key={p.id} className="p-4 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3 min-w-0">
+                <div key={p.id} className="py-2.5 px-0 flex items-center justify-between gap-2 w-full min-w-0">
+                  <div className="flex items-center gap-2 min-w-0 flex-1">
                     <img
                       src={p.images?.[0] || ""}
                       alt={p.title}
-                      className="h-12 w-12 rounded-xl object-cover bg-slate-100 flex-shrink-0 border border-slate-200"
+                      className="h-10 w-10 rounded-lg object-cover bg-slate-100 flex-shrink-0 border border-slate-200"
                     />
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <span className="font-bold text-slate-900 text-xs block truncate">
                         {p.title}
                       </span>
-                      <span className="font-bold text-rose-600 text-xs">
-                        {formatPrice(p.price)}
-                      </span>
-                      <span className={`text-[10px] font-semibold ml-2 ${p.stock > 0 ? "text-emerald-600" : "text-rose-600"}`}>
-                        {p.stock > 0 ? `${p.stock} left` : "Out of stock"}
-                      </span>
+                      {/* Price and Edit/View brought directly close together */}
+                      <div className="flex items-center gap-1.5 mt-0.5 min-w-0">
+                        <span className="font-bold text-rose-600 text-xs whitespace-nowrap">
+                          {formatPrice(p.price)}
+                        </span>
+                        <Link
+                          href={`/admin/products/${p.id}/edit`}
+                          className="inline-flex items-center gap-0.5 text-rose-600 hover:text-rose-700 font-bold bg-rose-50 px-1.5 py-0.5 rounded text-[10px] transition-colors flex-shrink-0"
+                        >
+                          <Edit3 size={10} /> Edit
+                        </Link>
+                        <Link
+                          href={`/products/${p.slug}`}
+                          target="_blank"
+                          className="inline-flex items-center gap-0.5 text-slate-500 hover:text-slate-800 font-bold px-1 py-0.5 rounded text-[10px] transition-colors flex-shrink-0"
+                        >
+                          <Eye size={10} /> View
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                  <Link
-                    href={`/admin/products/${p.id}/edit`}
-                    className="inline-flex items-center gap-1 text-rose-600 hover:text-rose-700 font-bold bg-rose-50 px-2.5 py-1.5 rounded-lg text-xs flex-shrink-0"
-                  >
-                    <Edit3 size={12} /> Edit
-                  </Link>
+                  <span className={`text-[10px] font-semibold whitespace-nowrap flex-shrink-0 ml-1 ${p.stock > 0 ? "text-emerald-600" : "text-rose-600"}`}>
+                    {p.stock > 0 ? `${p.stock} left` : "Out of stock"}
+                  </span>
                 </div>
               ))}
             </div>

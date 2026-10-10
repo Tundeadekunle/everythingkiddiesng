@@ -153,7 +153,7 @@ export default function NewProductAdminPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-5 sm:space-y-6 w-full min-w-0">
       <Link
         href="/admin/products"
         className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors"
@@ -161,13 +161,13 @@ export default function NewProductAdminPage() {
         <ArrowLeft size={14} /> Back to Products
       </Link>
 
-      <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-8">
+      <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 p-4 sm:p-8 shadow-sm space-y-6 sm:space-y-8">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold mb-2">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
             Connected to Live NeonDB
           </div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
             Upload Product to Store
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -340,18 +340,18 @@ export default function NewProductAdminPage() {
               {/* Add direct URL */}
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
                 <span className="text-xs font-bold text-slate-700 mb-1">Or Add Image Web URL</span>
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-full min-w-0">
                   <input
                     type="url"
                     value={newImageUrl}
                     onChange={(e) => setNewImageUrl(e.target.value)}
                     placeholder="https://images.unsplash.com/..."
-                    className="flex-1 px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-xl"
+                    className="flex-1 min-w-0 px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-xl"
                   />
                   <button
                     type="button"
                     onClick={handleAddImageUrl}
-                    className="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900"
+                    className="px-3.5 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 flex-shrink-0"
                   >
                     Add
                   </button>
@@ -368,9 +368,10 @@ export default function NewProductAdminPage() {
                     <button
                       type="button"
                       onClick={() => handleRemoveImage(i)}
-                      className="absolute top-1 right-1 p-1 bg-rose-500 text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+                      aria-label="Remove image"
+                      className="absolute top-1 right-1 p-1.5 bg-rose-500/90 hover:bg-rose-600 text-white rounded-lg opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-sm"
                     >
-                      <Trash2 size={12} />
+                      <Trash2 size={13} />
                     </button>
                   </div>
                 ))}
@@ -393,27 +394,27 @@ export default function NewProductAdminPage() {
               </button>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 w-full min-w-0">
               {specs.map((item, index) => (
-                <div key={index} className="flex items-center gap-2">
+                <div key={index} className="flex items-center gap-1.5 sm:gap-2 w-full min-w-0">
                   <input
                     type="text"
                     value={item.key}
                     onChange={(e) => handleSpecChange(index, "key", e.target.value)}
                     placeholder="Specification Key"
-                    className="flex-1 px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl"
+                    className="flex-1 min-w-0 px-2.5 sm:px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl"
                   />
                   <input
                     type="text"
                     value={item.value}
                     onChange={(e) => handleSpecChange(index, "value", e.target.value)}
                     placeholder="Specification Value"
-                    className="flex-1 px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl"
+                    className="flex-1 min-w-0 px-2.5 sm:px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl"
                   />
                   <button
                     type="button"
                     onClick={() => handleRemoveSpec(index)}
-                    className="p-2 text-slate-400 hover:text-rose-500 transition-colors"
+                    className="p-1.5 sm:p-2 text-slate-400 hover:text-rose-500 transition-colors flex-shrink-0"
                   >
                     <Trash2 size={15} />
                   </button>

@@ -7,24 +7,24 @@ export default async function AdminProductsListPage() {
   const products = await getProducts();
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Product Inventory</h1>
-          <p className="text-xs text-slate-500 mt-1">
+    <div className="space-y-5 sm:space-y-6 w-full max-w-full min-w-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 w-full min-w-0">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Product Inventory</h1>
+          <p className="text-xs text-slate-500 mt-0.5">
             Total {products.length} products stored in NeonDB
           </p>
         </div>
         <Link
           href="/admin/products/new"
-          className="px-4 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs shadow-md transition-all inline-flex items-center gap-1.5 self-start sm:self-auto"
+          className="self-start sm:self-auto px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl bg-rose-500 hover:bg-rose-600 active:bg-rose-700 text-white font-bold text-[11px] sm:text-xs shadow-sm transition-all inline-flex items-center gap-1.5"
         >
-          <Plus size={15} />
-          Upload New Product
+          <Plus size={13} />
+          <span>Upload Product</span>
         </Link>
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
         {products.length === 0 ? (
           <div className="text-center py-16 p-6 space-y-3">
             <h3 className="text-base font-bold text-slate-800">No products uploaded yet</h3>
@@ -54,12 +54,12 @@ export default async function AdminProductsListPage() {
                       <div className="font-bold text-slate-900 text-xs line-clamp-2">
                         {p.title}
                       </div>
-                      <div className="text-[11px] text-slate-500 mt-0.5">
+                      <div className="text-[11px] text-slate-500 mt-0.5 truncate">
                         {p.category?.name || "General"}
                       </div>
-                      <div className="flex items-center gap-1.5 mt-1">
+                      <div className="flex items-center gap-1.5 mt-1 flex-wrap">
                         {p.badge && (
-                          <span className="text-[10px] bg-rose-50 text-rose-600 font-bold px-1.5 py-0.5 rounded">
+                          <span className="text-[10px] bg-rose-50 text-rose-600 font-bold px-1.5 py-0.5 rounded truncate max-w-[120px]">
                             {p.badge}
                           </span>
                         )}
@@ -72,28 +72,31 @@ export default async function AdminProductsListPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-                    <div>
-                      <span className="font-black text-slate-900 text-sm block">{formatPrice(p.price)}</span>
-                      <span className={`text-[10px] font-bold ${p.stock > 0 ? "text-emerald-600" : "text-rose-600"}`}>
-                        {p.stock > 0 ? `${p.stock} units left` : "Out of stock"}
+                  <div className="flex items-center justify-between gap-1.5 pt-2 border-t border-slate-100 text-xs min-w-0 flex-wrap">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span className="font-black text-slate-900 text-sm whitespace-nowrap">
+                        {formatPrice(p.price)}
+                      </span>
+                      <span className={`text-[10px] font-bold whitespace-nowrap ${p.stock > 0 ? "text-emerald-600" : "text-rose-600"}`}>
+                        ({p.stock > 0 ? `${p.stock} left` : "Out of stock"})
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    {/* Edit and View buttons positioned very close to price */}
+                    <div className="flex items-center gap-1.5 flex-shrink-0">
                       <Link
                         href={`/admin/products/${p.id}/edit`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs transition-colors"
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-[11px] transition-colors"
                       >
-                        <Edit3 size={12} />
+                        <Edit3 size={11} />
                         Edit
                       </Link>
                       <Link
                         href={`/products/${p.slug}`}
                         target="_blank"
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700 hover:text-rose-600 hover:border-rose-300 font-bold text-xs transition-colors"
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-lg border border-slate-200 text-slate-700 hover:text-rose-600 hover:border-rose-300 font-bold text-[11px] transition-colors"
                       >
-                        <Eye size={12} />
+                        <Eye size={11} />
                         View
                       </Link>
                     </div>

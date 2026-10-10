@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { ShoppingBag, Search, Menu, X, Sparkles, ChevronDown, CheckCircle2, Shield, ArrowRight } from "lucide-react";
 import { useCartStore } from "@/lib/cart-store";
 import { CartDrawer } from "./cart-drawer";
 import { HowItWorksModal } from "./how-it-works-modal";
 
 export function Navbar() {
+  const pathname = usePathname();
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -17,6 +18,11 @@ export function Navbar() {
 
   const totalItems = useCartStore((state) => state.getTotalItems());
   const router = useRouter();
+
+  // Hide customer navbar and cart drawer completely on admin console pages
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

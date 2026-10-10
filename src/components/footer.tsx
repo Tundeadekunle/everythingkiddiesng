@@ -1,7 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Heart, ShieldCheck, Truck, Clock, RefreshCcw } from "lucide-react";
 
 export function Footer() {
+  const pathname = usePathname();
+
+  // Hide customer footer on admin console pages
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
   return (
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 border-t border-slate-800">
       {/* Value propositions */}

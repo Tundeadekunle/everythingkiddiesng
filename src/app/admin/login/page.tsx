@@ -45,8 +45,8 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-slate-800 rounded-3xl p-8 border border-slate-700 shadow-2xl space-y-6">
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-3.5 sm:p-4">
+      <div className="w-full max-w-md bg-slate-800 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-700 shadow-2xl space-y-6">
         <div className="text-center space-y-2">
           <div className="h-14 w-14 mx-auto rounded-2xl bg-gradient-to-tr from-rose-500 to-amber-400 flex items-center justify-center text-white shadow-lg">
             <Shield size={28} />

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { formatPrice } from "@/lib/utils";
-import { ShoppingCart, CheckCircle, Clock, Truck, ShieldCheck, RefreshCw } from "lucide-react";
+import { ClipboardList, CheckCircle, Clock, Truck, ShieldCheck, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 
 interface OrderItem {
@@ -119,35 +119,35 @@ export default function AdminOrdersPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Customer Orders</h1>
-          <p className="text-xs text-slate-500 mt-1">
+    <div className="space-y-5 sm:space-y-6 w-full max-w-full min-w-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 w-full min-w-0">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Customer Orders</h1>
+          <p className="text-xs text-slate-500 mt-0.5">
             Track Paystack payments and manage dispatch fulfillment
           </p>
         </div>
         <button
           onClick={fetchOrders}
           disabled={loading}
-          className="px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold text-xs shadow-sm transition-all inline-flex items-center gap-1.5 self-start sm:self-auto"
+          className="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 active:bg-slate-100 font-bold text-xs shadow-sm transition-all inline-flex items-center justify-center gap-1.5"
         >
           <RefreshCw size={13} className={loading ? "animate-spin" : ""} />
           Refresh Orders
         </button>
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden w-full max-w-full">
         {/* Mobile View: Clean cards for small screens */}
-        <div className="block lg:hidden divide-y divide-slate-100">
+        <div className="block lg:hidden divide-y divide-slate-100 w-full min-w-0">
           {ordersList.map((order) => (
-            <div key={order.id} className="p-4 space-y-3">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <span className="font-mono font-bold text-slate-900 text-xs block">
+            <div key={order.id} className="p-3.5 sm:p-4 space-y-3 w-full min-w-0">
+              <div className="flex items-start justify-between gap-2 min-w-0">
+                <div className="min-w-0 flex-1">
+                  <span className="font-mono font-bold text-slate-900 text-xs block truncate">
                     {order.orderNumber}
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono">
+                  <span className="text-[10px] text-slate-400 font-mono block truncate">
                     {order.paystackReference}
                   </span>
                 </div>
@@ -174,27 +174,27 @@ export default function AdminOrdersPage() {
               </div>
 
               {order.items && order.items.length > 0 && (
-                <div className="text-xs space-y-1 border-t border-slate-100 pt-2">
+                <div className="text-xs space-y-1 border-t border-slate-100 pt-2 min-w-0">
                   <div className="text-[11px] font-bold text-slate-400 uppercase">Items:</div>
                   <ul className="space-y-1">
                     {order.items.map((item, idx) => (
-                      <li key={idx} className="text-slate-700 text-xs flex justify-between">
-                        <span>
+                      <li key={idx} className="text-slate-700 text-xs flex items-center justify-between gap-2 min-w-0">
+                        <span className="truncate min-w-0 flex-1">
                           <strong className="text-rose-500">{item.quantity}x</strong> {item.productTitle}
                         </span>
-                        <span className="font-semibold">{formatPrice(item.price)}</span>
+                        <span className="font-semibold whitespace-nowrap flex-shrink-0">{formatPrice(item.price)}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
 
-              <div className="flex items-center justify-between pt-2 border-t border-slate-100">
-                <div>
+              <div className="flex items-center justify-between pt-2 border-t border-slate-100 gap-2 min-w-0">
+                <div className="min-w-0">
                   <span className="text-[10px] uppercase font-bold text-slate-400 block">Total Due</span>
-                  <span className="font-black text-rose-600 text-sm">{formatPrice(order.totalAmount)}</span>
+                  <span className="font-black text-rose-600 text-sm whitespace-nowrap">{formatPrice(order.totalAmount)}</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-shrink-0">
                   <span className="text-[11px] text-slate-500 font-bold">Status:</span>
                   <select
                     value={order.status}
